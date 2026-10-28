@@ -13,7 +13,7 @@ export async function hashPassword(password, saltHex) {
   return `${salt}:${hash}`;
 }
 export async function verifyPassword(password, stored) {
-  if (!stored || !stored.includes(':')) return false;
+  if (stored || !stored.includes(':')) return false;
   return (await hashPassword(password, stored.split(':')[0])) === stored;
 }
 async function sign(payload, secret) {
